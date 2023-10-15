@@ -14,7 +14,7 @@ class QuizInterface:
         self.quiz=quiz_brain
         self.window.title("Quizzler")
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
-        self.score_label = Label(text="Score: 0", fg="white", bg=THEME_COLOR)
+        self.score_label = Label(text=f"Score: {self.quiz.score}", fg="white", bg=THEME_COLOR)
         self.score_label.grid(column=1, row=0)
         self.canvas = Canvas(width=300, height=250, bg="white")
         self.question_text = self.canvas.create_text(150, 125, text="Some Text", fill=THEME_COLOR,
@@ -22,8 +22,8 @@ class QuizInterface:
         self.canvas.grid(column=0, row=1, columnspan=2, pady=50)
         true_pic = PhotoImage(file="images/true.png")
         false_pic = PhotoImage(file="images/false.png")
-        self.true_button = Button(self.window, image=true_pic)
-        self.false_button =Button(self.window, image=false_pic)
+        self.true_button = Button(self.window, image=true_pic, command=self.quiz.true_answer)
+        self.false_button =Button(self.window, image=false_pic, command=self.quiz.false_answer)
         self.true_button.grid(column=0, row=2)
         self.false_button.grid(column=1, row=2)
         self.get_next_question()
